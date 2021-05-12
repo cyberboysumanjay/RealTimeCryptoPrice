@@ -1,5 +1,6 @@
 click
 flask
+gunicorn
 itsdangerous
 jinja2
 markupsafe
