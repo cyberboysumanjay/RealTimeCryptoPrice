@@ -15,9 +15,18 @@ def home():
     supported_cryptos = requests.get(API_URL).json().keys()
     return render_template("home.html",supported_cryptos=supported_cryptos)
 
+@app.route("/arc-sw.js")
+def arc():
+    return send_from_directory(os.getcwd()+"/static","arc-sw.js")
+
+
+
 @app.route("/<crypto>")
 def index(crypto):
-    return render_template("index.html",crypto=crypto)
+    supported_cryptos = requests.get(API_URL).json().keys()
+    if crypto.lower() in supported_cryptos:
+        return render_template("index.html",crypto=crypto)
+    return "This Cryptocurrency is not yet supported!"
 
 
 def generate_random_data(crypto_code):
